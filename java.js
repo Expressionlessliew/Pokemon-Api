@@ -58,3 +58,20 @@ function getPoke() {
       alert("Error fetching data");
     });
 }
+
+document.addEventListener("DOMContentLoaded", function () {
+  const audio = document.getElementById("backgroundAudio");
+  const volumeButton = document.getElementById("volumeButton");
+
+  let isMuted = false;
+
+  volumeButton.addEventListener("click", function () {
+    if (!audio.paused) {
+      audio.pause();
+    } else {
+      audio.play();
+    }
+    isMuted = !isMuted;
+    volumeButton.innerText = isMuted ? "Unmute" : "Mute";
+  });
+});
