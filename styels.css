@@ -14,7 +14,15 @@
     height: 100vh;
   }
   
+  img{
+    height: 250px;
+    width: auto;
+  }
+
+
   #pokemoncontainer {
+    font-size: 20px;
+    margin-top: 40px;
     padding: 20px;
     display: flex;
     flex-direction: column;
@@ -22,16 +30,22 @@
   }
     
   #search {
-    margin-top: 450px;
-    margin-left: 320px;
-    width: 160px;
-    height: auto;
+    margin-top: 498px;
+    margin-left: 470px;
+    width: 177px;
+    height: 85px;
     position: fixed;
   }
   
   #searchbtn {
     display: block;
     margin: 0 auto;
+    border-radius: 160px;
+    width: 50px;
+    height: 50px;
+    margin-top: 508px;
+    margin-left: 770px;
+    position: fixed;
   }
 
   #volumeButton{
