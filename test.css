@@ -1,0 +1,127 @@
+body {
+  background-color: white;
+  font-family: "Roboto", sans-serif;
+  color: black;
+  margin: 0;
+  padding: 0;
+}
+
+.header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: 22px;
+  padding-bottom: 30px;
+  border-radius: 15px;
+}
+
+.header h1 {
+  margin-bottom: 10px;
+}
+
+#search {
+  border: none;
+  border-radius: 20px; /* Adjust the value to control the roundness */
+  padding: 10px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Add a subtle shadow for depth */
+  width: 200px; /* Adjust the width as needed */
+}
+
+#searchbtn {
+  background-color: #007bff; /* Change to your preferred color */
+  color: #fff;
+  border: none;
+  border-radius: 20px; /* Match the input's roundness */
+  padding: 10px 20px;
+  margin-left: -40px; /* Adjust to align the button with the input */
+  cursor: pointer;
+}
+
+#randomPokemonButton {
+  background-color: purple; /* Change to your preferred color */
+  color: #fff;
+  border: none;
+  border-radius: 20px; /* Match the input's roundness */
+  padding: 10px 20px;
+  margin-left: 0px; /* Adjust to align the button with the input */
+  cursor: pointer;
+}
+
+/* Style the volume button */
+#volumeButton {
+  background-color: grey; /* Change to your preferred color */
+  color: #fff;
+  border: none;
+  border-radius: 20px; /* Adjust the value to control the roundness */
+  padding: 10px 15px; /* Adjust padding as needed */
+  margin-left: 0px; /* Adjust to align the button with the input */
+  cursor: pointer;
+}
+
+@media (min-width: 768px) {
+  .header {
+    width: 50%;
+    margin: 0 auto;
+    background-color: #f0f0f0;
+  }
+}
+
+@media (max-width: 767px) {
+  .header {
+    width: 100%;
+    background-color: #fff;
+  }
+}
+
+.container {
+  padding: 15px 0;
+  text-align: center;
+  border-radius: 20px;
+}
+
+@media (min-width: 768px) {
+  .container {
+    width: 50%;
+    margin: 0 auto;
+  }
+}
+
+@media (max-width: 767px) {
+  .container {
+    width: 100%;
+  }
+}
+
+#pokemoncontainer {
+  /* box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1); */
+  position: relative; /* Needed for the pseudo-element */
+}
+
+.pokeName {
+  font-size: 24px;
+  margin: 0;
+  text-transform: capitalize; /* Capitalize the Pokémon name */
+}
+
+.pokePic {
+  width: 175px;
+  height: 175px;
+  margin-top: 10px;
+  border: 6px solid gold;
+  border-radius: 50%; /* Make the image round */
+}
+
+/* Style the Pokémon details */
+.pokeOrd,
+.pokehei,
+.pokewei,
+.pokePo {
+  font-size: 16px;
+  margin: 10px 0;
+}
+
+/* Style the Types */
+.pokePo {
+  font-weight: bold;
+}

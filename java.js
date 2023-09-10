@@ -1,15 +1,16 @@
 // Function to change background color based on Pokémon type
 function changeBackgroundColor(pokemonTypes) {
-  const body = document.body;
+  const container = document.getElementById("pokemoncontainer");
+  console.log(container)
 
   // Define CSS styles for each type
   const typeStyles = {
-    water: "blue",
-    fire: "red",
+    water: "#3EB39F",
+    fire: "#FF7276",
     dragon: "antiquewhite",
     ground: "brown",
     psychic: "purple",
-    electric: "yellow",
+    electric: "#FFF67D",
     steel: "grey",
     dark:"black",
     poison:"BlueViolet ",
@@ -20,8 +21,8 @@ function changeBackgroundColor(pokemonTypes) {
     flying:"skyblue",
     fairy:"pink",
     rock:"sienna",
-    ice:"royalblue",
-    grass:"green",
+    ice:"#3EB39F",
+    grass:"#AFFF80",
     fighting:"white"
   };
 
@@ -29,16 +30,13 @@ function changeBackgroundColor(pokemonTypes) {
     const [type1, type2] = pokemonTypes;
   
     // Check if both types have defined styles
-    if (typeStyles[type1] && typeStyles[type2]) {
-      // Calculate the split point for the background
-      const splitPoint = "50%";
+    if (typeStyles[type1]) {
   
-      // Apply background gradient
-      body.style.background = `linear-gradient(to right, ${typeStyles[type1]} ${splitPoint}, ${typeStyles[type2]} ${splitPoint})`;
+      container.style.backgroundColor = typeStyles[type1];
     }
   } else if (typeStyles[pokemonTypes[0]]) {
     // If there's only one type, set the background color
-    body.style.backgroundColor = typeStyles[pokemonTypes[0]];
+    container.style.backgroundColor = typeStyles[pokemonTypes[0]];
   }
 }
 
