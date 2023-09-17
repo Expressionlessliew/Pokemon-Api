@@ -42,6 +42,7 @@ function changeBackgroundColor(pokemonTypes) {
 
 const searchBtn = document.getElementById("searchbtn");
 const PokeContainer = document.getElementById("pokemoncontainer");
+const errorContainer = document.getElementById("errorContainer");
 
 searchBtn.addEventListener("click", getPoke);
 
@@ -49,6 +50,7 @@ function getPoke() {
   console.log("hello");
   // Clear the old data
   PokeContainer.innerHTML = "";
+  errorContainer.textContent = "";
 
   const userSearch = document
     .getElementById("search")
@@ -57,53 +59,59 @@ function getPoke() {
 
   // API call
   fetch(`https://pokeapi.co/api/v2/pokemon/${userSearch}`)
-    .then((response) => response.json())
-    .then((data) => {
-      if (data) {
-        const { name, order, sprites, types, height, weight } = data;
-
-        const pokeNameContainer = document.createElement("h1");
-        pokeNameContainer.classList.add("pokeName");
-        pokeNameContainer.textContent = name;
-        PokeContainer.appendChild(pokeNameContainer);
-
-        const pokePicContainer = document.createElement("img");
-        pokePicContainer.classList.add("pokePic");
-        pokePicContainer.src = sprites.front_default;
-        pokePicContainer.alt = name;
-        PokeContainer.appendChild(pokePicContainer);
-
-        const pokeOrdContainer = document.createElement("p");
-        pokeOrdContainer.classList.add("pokeOrd");
-        pokeOrdContainer.textContent = `Order: ${order}`;
-        PokeContainer.appendChild(pokeOrdContainer);
-
-        const pokeheiContainer = document.createElement("p");
-        pokeheiContainer.classList.add("pokehei");
-        pokeheiContainer.textContent = `height: ${height}`;
-        PokeContainer.appendChild(pokeheiContainer);
-
-        const pokehweiContainer = document.createElement("p");
-        pokehweiContainer.classList.add("pokewei");
-        pokehweiContainer.textContent = `weight: ${weight}`;
-        PokeContainer.appendChild(pokehweiContainer);
-
-        const typesContainer = document.createElement("p");
-        typesContainer.classList.add("pokePo");
-        const typeNames = types.map((type) => type.type.name).join(", ");
-        typesContainer.textContent = `Types: ${typeNames}`;
-        PokeContainer.appendChild(typesContainer);
-
-        // Change background color based on Pokémon type
-        changeBackgroundColor(types.map((type) => type.type.name));
-      } else {
-        console.log("No data found");
+  .then((response) => {
+      if (!response.ok) {
+          throw new Error("Network response was not ok");
       }
-    })
-    .catch((error) => {
+      return response.json();
+  })
+  .then((data) => {
+      if (data) {
+          const { name, order, sprites, types, height, weight } = data;
+
+          const pokeNameContainer = document.createElement("h1");
+          pokeNameContainer.classList.add("pokeName");
+          pokeNameContainer.textContent = name;
+          PokeContainer.appendChild(pokeNameContainer);
+
+          const pokePicContainer = document.createElement("img");
+          pokePicContainer.classList.add("pokePic");
+          pokePicContainer.src = sprites.front_default;
+          pokePicContainer.alt = name;
+          PokeContainer.appendChild(pokePicContainer);
+
+          const pokeOrdContainer = document.createElement("p");
+          pokeOrdContainer.classList.add("pokeOrd");
+          pokeOrdContainer.textContent = `Order: ${order}`;
+          PokeContainer.appendChild(pokeOrdContainer);
+
+          const pokeheiContainer = document.createElement("p");
+          pokeheiContainer.classList.add("pokehei");
+          pokeheiContainer.textContent = `height: ${height}`;
+          PokeContainer.appendChild(pokeheiContainer);
+
+          const pokehweiContainer = document.createElement("p");
+          pokehweiContainer.classList.add("pokewei");
+          pokehweiContainer.textContent = `weight: ${weight}`;
+          PokeContainer.appendChild(pokehweiContainer);
+
+          const typesContainer = document.createElement("p");
+          typesContainer.classList.add("pokePo");
+          const typeNames = types.map((type) => type.type.name).join(", ");
+          typesContainer.textContent = `Types: ${typeNames}`;
+          PokeContainer.appendChild(typesContainer);
+
+          // Change background color based on Pokémon type
+          changeBackgroundColor(types.map((type) => type.type.name));
+      } else {
+          console.log("No data found");
+      }
+  })
+  .catch((error) => {
       console.log(error);
-      alert("Error fetching data");
-    });
+      // Display the error message on the website
+      errorContainer.textContent = "Error fetching data. Please try again later.";
+  });
 }
 
 document.addEventListener("DOMContentLoaded", function () {
@@ -138,6 +146,8 @@ function getRandomPokemon() {
   fetch(`https://pokeapi.co/api/v2/pokemon/${randomPokemonId}`)
     .then((response) => response.json())
     .then((data) => {
+      errorContainer.textContent = "";
+
       if (data) {
         const { name, order, sprites, types, height, weight } = data;
 
