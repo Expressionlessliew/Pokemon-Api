@@ -90,9 +90,9 @@ body {
   }
 }
 
-@media (max-width: 767px) {
+@media (max-width: 499px) {
   .container {
-    width: 100%;
+    margin: 0 15px; /* Equal margin on both sides */
   }
 }
 
@@ -155,6 +155,13 @@ body {
   background-color: lightblue;
   color: black;
 }
+
+.type-electric {
+  background-color: orange;
+  color: black;
+  width: 70px;
+}
+
 
 #errorContainer{
   color: red;
