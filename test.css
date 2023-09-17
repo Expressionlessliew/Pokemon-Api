@@ -162,6 +162,48 @@ body {
   width: 70px;
 }
 
+.type-rock {
+  background-color: lightcoral;
+  color: black;
+}
+
+.type-poison {
+  background-color: purple;
+  color: white;
+  width: 60px;
+}
+
+.type-grass {
+  background-color: green;
+  color: white;
+  width: 60px;
+}
+
+.type-fairy {
+  background-color: pink;
+  color: black;
+}
+
+.type-psychic {
+  background-color: maroon;
+  color: white;
+  width: 70px;
+}
+
+.type-ice {
+  background-color: aquamarine;
+  color: black;
+}
+
+.type-bug {
+  background-color: grey;
+  color: black;
+}
+
+.type-ghost {
+  background-color: gray;
+  color: black;
+}
 
 #errorContainer{
   color: red;
