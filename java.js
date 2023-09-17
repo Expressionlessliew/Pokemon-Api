@@ -1,7 +1,7 @@
 // Function to change background color based on Pokémon type
 function changeBackgroundColor(pokemonTypes) {
   const container = document.getElementById("pokemoncontainer");
-  console.log(container)
+  console.log(container);
 
   // Define CSS styles for each type
   const typeStyles = {
@@ -12,26 +12,25 @@ function changeBackgroundColor(pokemonTypes) {
     psychic: "purple",
     electric: "#FFF67D",
     steel: "grey",
-    dark:"black",
-    poison:"BlueViolet ",
-    drangon:"Tan",
-    normal:"snow",
-    ghost:"silver",
-    bug:"seagreen",
-    flying:"skyblue",
-    fairy:"pink",
-    rock:"sienna",
-    ice:"#3EB39F",
-    grass:"#AFFF80",
-    fighting:"white"
+    dark: "black",
+    poison: "BlueViolet ",
+    drangon: "Tan",
+    normal: "snow",
+    ghost: "silver",
+    bug: "seagreen",
+    flying: "skyblue",
+    fairy: "pink",
+    rock: "sienna",
+    ice: "#3EB39F",
+    grass: "#AFFF80",
+    fighting: "white",
   };
 
   if (pokemonTypes.length === 2) {
     const [type1, type2] = pokemonTypes;
-  
+
     // Check if both types have defined styles
     if (typeStyles[type1]) {
-  
       container.style.backgroundColor = typeStyles[type1];
     }
   } else if (typeStyles[pokemonTypes[0]]) {
@@ -67,42 +66,52 @@ function getPoke() {
   })
   .then((data) => {
       if (data) {
-          const { name, order, sprites, types, height, weight } = data;
+        const { name, order, sprites, types, height, weight } = data;
 
-          const pokeNameContainer = document.createElement("h1");
-          pokeNameContainer.classList.add("pokeName");
-          pokeNameContainer.textContent = name;
-          PokeContainer.appendChild(pokeNameContainer);
+        const pokeNameContainer = document.createElement("h1");
+        pokeNameContainer.classList.add("pokeName");
+        pokeNameContainer.textContent = name;
+        PokeContainer.appendChild(pokeNameContainer);
 
-          const pokePicContainer = document.createElement("img");
-          pokePicContainer.classList.add("pokePic");
-          pokePicContainer.src = sprites.front_default;
-          pokePicContainer.alt = name;
-          PokeContainer.appendChild(pokePicContainer);
+        const pokePicContainer = document.createElement("img");
+        pokePicContainer.classList.add("pokePic");
+        pokePicContainer.src = sprites.front_default;
+        pokePicContainer.alt = name;
+        PokeContainer.appendChild(pokePicContainer);
 
-          const pokeOrdContainer = document.createElement("p");
-          pokeOrdContainer.classList.add("pokeOrd");
-          pokeOrdContainer.textContent = `Order: ${order}`;
-          PokeContainer.appendChild(pokeOrdContainer);
+        const pokeOrdContainer = document.createElement("p");
+        pokeOrdContainer.classList.add("pokeOrd");
+        pokeOrdContainer.textContent = `Order: ${order}`;
+        PokeContainer.appendChild(pokeOrdContainer);
 
-          const pokeheiContainer = document.createElement("p");
-          pokeheiContainer.classList.add("pokehei");
-          pokeheiContainer.textContent = `height: ${height}`;
-          PokeContainer.appendChild(pokeheiContainer);
+        const pokeheiContainer = document.createElement("p");
+        pokeheiContainer.classList.add("pokehei");
+        pokeheiContainer.textContent = `height: ${height}`;
+        PokeContainer.appendChild(pokeheiContainer);
 
-          const pokehweiContainer = document.createElement("p");
-          pokehweiContainer.classList.add("pokewei");
-          pokehweiContainer.textContent = `weight: ${weight}`;
-          PokeContainer.appendChild(pokehweiContainer);
+        const pokehweiContainer = document.createElement("p");
+        pokehweiContainer.classList.add("pokewei");
+        pokehweiContainer.textContent = `weight: ${weight}`;
+        PokeContainer.appendChild(pokehweiContainer);
 
-          const typesContainer = document.createElement("p");
-          typesContainer.classList.add("pokePo");
-          const typeNames = types.map((type) => type.type.name).join(", ");
-          typesContainer.textContent = `Types: ${typeNames}`;
-          PokeContainer.appendChild(typesContainer);
+        const typesContainer = document.createElement("div");
+        typesContainer.classList.add("pokeTypesContainer");
 
-          // Change background color based on Pokémon type
-          changeBackgroundColor(types.map((type) => type.type.name));
+        types.forEach((type) => {
+          const typeCell = document.createElement("div");
+          const typeName = type.type.name;
+
+          typeCell.classList.add("type-cell");
+          typeCell.classList.add(`type-${typeName}`);
+          typeCell.textContent = typeName;
+
+          typesContainer.appendChild(typeCell);
+        });
+
+        PokeContainer.appendChild(typesContainer);
+
+        // Change background color based on Pokémon type
+        changeBackgroundColor(types.map((type) => type.type.name));
       } else {
           console.log("No data found");
       }

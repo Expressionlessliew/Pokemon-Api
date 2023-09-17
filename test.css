@@ -20,7 +20,7 @@ body {
 }
 
 .header h1 {
-  margin-bottom:8px;
+  margin-bottom: 8px;
 }
 
 #search {
@@ -125,8 +125,35 @@ body {
 }
 
 /* Style the Types */
-.pokePo {
-  font-weight: bold;
+
+.pokeTypesContainer {
+  display: flex;
+  justify-content: center;
+}
+
+.type-cell {
+  background-color: #ccc; /* Default background color for cells */
+  color: #000; /* Default text color for cells */
+  padding: 5px 10px;
+  margin: 0 5px;
+  border-radius: 15px;
+  box-shadow: 0px 3px 5px rgba(0, 0, 0, 0.2);
+  width: 50px;
+}
+
+.type-fire {
+  background-color: red;
+  color: white;
+}
+
+.type-water {
+  background-color: blue;
+  color: white;
+}
+
+.type-flying {
+  background-color: lightblue;
+  color: black;
 }
 
 #errorContainer{
