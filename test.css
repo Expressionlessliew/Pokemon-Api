@@ -1,6 +1,5 @@
 @import url("https://fonts.googleapis.com/css2?family=Orbitron:wght@600&display=swap");
 
-
 body {
   background-color: white;
   font-family: "Orbitron", sans-serif;
@@ -145,21 +144,30 @@ body {
   background-color: red;
   color: white;
   width: 60px;
-
 }
 
 .type-water {
   background-color: blue;
   color: white;
   width: 60px;
-
 }
 
-.type-flying {
-  background-color: lightblue;
-  color: black;
-  width: 60px;
+.type-dragon {
+  background-color: antiquewhite;
+  color: aqua;
+  width: 100px;
+}
 
+.type-ground {
+  background-color: brown;
+  color: rgb(234, 255, 0);
+  width: 60px;
+}
+
+.type-psychic {
+  background-color: maroon;
+  color: white;
+  width: 70px;
 }
 
 .type-electric {
@@ -168,16 +176,63 @@ body {
   width: 70px;
 }
 
-.type-rock {
-  background-color: lightcoral;
-  color: black;
+.type-steel {
+  background-color: grey;
+  color: white;
   width: 60px;
+}
 
+.type-dark {
+  background-color: black;
+  color: white;
+  width: 60px;
 }
 
 .type-poison {
   background-color: purple;
   color: white;
+  width: 60px;
+}
+
+.type-normal {
+  background-color: rgba(128, 128, 128, 0.315);
+  color: black;
+  width: 60px;
+}
+
+.type-ghost {
+  background-color: gray;
+  color: black;
+  width: 60px;
+}
+
+.type-bug {
+  background-color: grey;
+  color: black;
+  width: 60px;
+}
+
+.type-flying {
+  background-color: lightblue;
+  color: black;
+  width: 60px;
+}
+
+.type-fairy {
+  background-color: pink;
+  color: black;
+  width: 60px;
+}
+
+.type-rock {
+  background-color: lightcoral;
+  color: black;
+  width: 60px;
+}
+
+.type-ice {
+  background-color: aquamarine;
+  color: black;
   width: 60px;
 }
 
@@ -187,41 +242,13 @@ body {
   width: 60px;
 }
 
-.type-fairy {
-  background-color: pink;
-  color: black;
-  width: 60px;
-
-}
-
-.type-psychic {
-  background-color: maroon;
+.type-fighting {
+  background-color:cyan;
   color: white;
   width: 70px;
 }
 
-.type-ice {
-  background-color: aquamarine;
-  color: black;
-  width: 60px;
-
-}
-
-.type-bug {
-  background-color: grey;
-  color: black;
-  width: 60px;
-
-}
-
-.type-ghost {
-  background-color: gray;
-  color: black;
-  width: 60px;
-
-}
-
-#errorContainer{
+#errorContainer {
   color: red;
   text-align: center;
 }

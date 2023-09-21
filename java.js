@@ -12,9 +12,8 @@ function changeBackgroundColor(pokemonTypes) {
     psychic: "purple",
     electric: "#FFF67D",
     steel: "grey",
-    dark: "black",
+    dark: "indig",
     poison: "BlueViolet ",
-    drangon: "Tan",
     normal: "snow",
     ghost: "silver",
     bug: "seagreen",
@@ -86,12 +85,12 @@ function getPoke() {
 
         const pokeheiContainer = document.createElement("p");
         pokeheiContainer.classList.add("pokehei");
-        pokeheiContainer.textContent = `height: ${height}`;
+        pokeheiContainer.textContent = `height: ${height} m`;
         PokeContainer.appendChild(pokeheiContainer);
 
         const pokehweiContainer = document.createElement("p");
         pokehweiContainer.classList.add("pokewei");
-        pokehweiContainer.textContent = `weight: ${weight}`;
+        pokehweiContainer.textContent = `weight: ${weight} kg`;
         PokeContainer.appendChild(pokehweiContainer);
 
         const typesContainer = document.createElement("div");
@@ -139,7 +138,7 @@ document.addEventListener("DOMContentLoaded", function () {
     isMuted = !isMuted;
     volumeButton.innerText = isMuted ? "Unmute" : "Mute";
   });
-  setupAutocomplete([])
+  // setupAutocomplete([])
 });
 
 const randomPokemonButton = document.getElementById("randomPokemonButton");
@@ -180,20 +179,33 @@ function getRandomPokemon() {
 
         const pokeheiContainer = document.createElement("p");
         pokeheiContainer.classList.add("pokehei");
-        pokeheiContainer.textContent = `height: ${height}`;
+        pokeheiContainer.textContent = `height: ${height} m`;
         PokeContainer.appendChild(pokeheiContainer);
 
         const pokehweiContainer = document.createElement("p");
         pokehweiContainer.classList.add("pokewei");
-        pokehweiContainer.textContent = `weight: ${weight}`;
+        pokehweiContainer.textContent = `weight: ${weight} kg`;
         PokeContainer.appendChild(pokehweiContainer);
 
-        const typesContainer = document.createElement("p");
-        typesContainer.classList.add("pokePo");
-        const typeNames = types.map((type) => type.type.name).join(", ");
-        typesContainer.textContent = `Types: ${typeNames}`;
+        const typesContainer = document.createElement("div");
+        typesContainer.classList.add("pokeTypesContainer");
+        
+        types.forEach((type) => {
+          const typeCell = document.createElement("div");
+          const typeName = type.type.name;
+        
+          typeCell.classList.add("type-cell");
+          typeCell.classList.add(`type-${typeName}`);
+          typeCell.textContent = typeName;
+        
+          typesContainer.appendChild(typeCell);
+        });
+        
         PokeContainer.appendChild(typesContainer);
-
+        
+        // Change background color based on Pokémon type
+        changeBackgroundColor(types.map((type) => type.type.name));
+        
         // Change background color based on Pokémon type
         changeBackgroundColor(types.map((type) => type.type.name));
       } else {
@@ -206,7 +218,8 @@ function getRandomPokemon() {
     });
 }
 
-function setupAutocomplete(pokemonNames) {
+
+// function setupAutocomplete(pokemonNames) {
 //   new autoComplete({
 //     data: {
 //       src: pokemonNames,
@@ -230,4 +243,4 @@ function setupAutocomplete(pokemonNames) {
 //       alert("You selected: " + term);
 //     },
 //   });
- }
+
