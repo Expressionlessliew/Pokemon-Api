@@ -58,13 +58,13 @@ function getPoke() {
 
   // API call
   fetch(`https://pokeapi.co/api/v2/pokemon/${userSearch}`)
-  .then((response) => {
+    .then((response) => {
       if (!response.ok) {
-          throw new Error("Network response was not ok");
+        throw new Error("Network response was not ok");
       }
       return response.json();
-  })
-  .then((data) => {
+    })
+    .then((data) => {
       if (data) {
         const { name, order, sprites, types, height, weight } = data;
 
@@ -113,14 +113,15 @@ function getPoke() {
         // Change background color based on Pokémon type
         changeBackgroundColor(types.map((type) => type.type.name));
       } else {
-          console.log("No data found");
+        console.log("No data found");
       }
-  })
-  .catch((error) => {
+    })
+    .catch((error) => {
       console.log(error);
       // Display the error message on the website
-      errorContainer.textContent = "Error fetching data. Please try again later.";
-  });
+      errorContainer.textContent =
+        "Error fetching data. Please try again later.";
+    });
 }
 
 document.addEventListener("DOMContentLoaded", function () {
@@ -138,6 +139,7 @@ document.addEventListener("DOMContentLoaded", function () {
     isMuted = !isMuted;
     volumeButton.innerText = isMuted ? "Unmute" : "Mute";
   });
+  setupAutocomplete([])
 });
 
 const randomPokemonButton = document.getElementById("randomPokemonButton");
@@ -203,3 +205,29 @@ function getRandomPokemon() {
       alert("Error fetching data");
     });
 }
+
+function setupAutocomplete(pokemonNames) {
+//   new autoComplete({
+//     data: {
+//       src: pokemonNames,
+//       cache: false,
+//     },
+//     selector: "#pokemonInput",
+//     threshold: 1,
+//     debounce: 300,
+//     maxResults: 5,
+//     renderItem: function (item, search) {
+//       return (
+//         '<div class="autocomplete-suggestion" data-val="' +
+//         item +
+//         '">' +
+//         item +
+//         "</div>"
+//       );
+//     },
+//     onSelect: function (event, term, item) {
+//       // Handle item selection (e.g., show details of the selected Pokémon)
+//       alert("You selected: " + term);
+//     },
+//   });
+ }

@@ -3,6 +3,9 @@
   <head>
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Pokedex</title>
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-database.js"></script>
+
     <link rel="icon" type="png" href="assets/images/pokeball.png" />
 
     <link
@@ -25,6 +28,7 @@
       <h1>Pokedex</h1>
       <div class="search-area">
         <input type="text" id="search" placeholder="Search Pokemon" />
+        <div id="suggestions" class="suggestions"></div>
         <button id="searchbtn">&#10004;</button>
         <button id="randomPokemonButton">Random</button>
         <button id="volumeButton" class="mute">

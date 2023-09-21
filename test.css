@@ -144,16 +144,22 @@ body {
 .type-fire {
   background-color: red;
   color: white;
+  width: 60px;
+
 }
 
 .type-water {
   background-color: blue;
   color: white;
+  width: 60px;
+
 }
 
 .type-flying {
   background-color: lightblue;
   color: black;
+  width: 60px;
+
 }
 
 .type-electric {
@@ -165,6 +171,8 @@ body {
 .type-rock {
   background-color: lightcoral;
   color: black;
+  width: 60px;
+
 }
 
 .type-poison {
@@ -174,7 +182,7 @@ body {
 }
 
 .type-grass {
-  background-color: green;
+  background-color: rgba(0, 255, 0, 0.801);
   color: white;
   width: 60px;
 }
@@ -182,6 +190,8 @@ body {
 .type-fairy {
   background-color: pink;
   color: black;
+  width: 60px;
+
 }
 
 .type-psychic {
@@ -193,16 +203,22 @@ body {
 .type-ice {
   background-color: aquamarine;
   color: black;
+  width: 60px;
+
 }
 
 .type-bug {
   background-color: grey;
   color: black;
+  width: 60px;
+
 }
 
 .type-ghost {
   background-color: gray;
   color: black;
+  width: 60px;
+
 }
 
 #errorContainer{
