@@ -219,28 +219,52 @@ function getRandomPokemon() {
 }
 
 
-// function setupAutocomplete(pokemonNames) {
-//   new autoComplete({
-//     data: {
-//       src: pokemonNames,
-//       cache: false,
-//     },
-//     selector: "#pokemonInput",
-//     threshold: 1,
-//     debounce: 300,
-//     maxResults: 5,
-//     renderItem: function (item, search) {
-//       return (
-//         '<div class="autocomplete-suggestion" data-val="' +
-//         item +
-//         '">' +
-//         item +
-//         "</div>"
-//       );
-//     },
-//     onSelect: function (event, term, item) {
-//       // Handle item selection (e.g., show details of the selected Pokémon)
-//       alert("You selected: " + term);
-//     },
-//   });
+// Initialize Firebase (Use your Firebase config here)
+firebase.initializeApp(firebaseConfig);
 
+// Reference to your Firebase Realtime Database
+const database = firebase.database();
+const pokemonRef = database.ref("pokemon");
+
+const searchInput = document.getElementById("search");
+const suggestionsDiv = document.getElementById("suggestions");
+
+// Listen for input changes
+searchInput.addEventListener("input", () => {
+  const searchTerm = searchInput.value.toLowerCase().trim();
+
+  // Clear previous suggestions
+  suggestionsDiv.innerHTML = "";
+
+  if (searchTerm === "") {
+    return; // Don't make an empty search
+  }
+
+  // Fetch data from Firebase and filter by the search term
+  pokemonRef
+    .orderByChild("name")
+    .startAt(searchTerm)
+    .endAt(searchTerm + "\uf8ff")
+    .once("value")
+    .then((snapshot) => {
+      const suggestions = [];
+
+      snapshot.forEach((childSnapshot) => {
+        const pokemonName = childSnapshot.val().name;
+        suggestions.push(pokemonName);
+      });
+
+      // Display suggestions
+      suggestions.forEach((suggestion) => {
+        const suggestionElement = document.createElement("div");
+        suggestionElement.textContent = suggestion;
+        suggestionsDiv.appendChild(suggestionElement);
+
+        // Handle suggestion click
+        suggestionElement.addEventListener("click", () => {
+          searchInput.value = suggestion;
+          suggestionsDiv.innerHTML = ""; // Clear suggestions
+        });
+      });
+    });
+});

@@ -1,13 +1,166 @@
 {
+  "questions": [
+    {
+      "name": "How many keys are there in a piano?",
+      "answer": "88"
+    },
+    {
+      "name": "How many keys does a keyboard have?",
+      "answer": "104"
+    },
+    {
+      "name": "How many function keys are there in a keyboard",
+      "answer": "12"
+    },
+    {
+      "name": "How many days are there in a year?",
+      "answer": "365"
+    },
+    {
+      "name": "How many days are there in a week?",
+      "answer": "7"
+    },
+    {
+      "name": "How many days are there in a month?",
+      "answer": "30"
+    },
+    {
+      "name": "How many weeks are there in a month?",
+      "answer": "4"
+    },
+    {
+      "name": "How many weeks are there in a year?",
+      "answer": "52"
+    },
+    {
+      "name": "how many alphabets are there?",
+      "answer": "26"
+    },
+    {
+      "name": "How many vowel are there?",
+      "answer": "5"
+    },
+    {
+      "name": "how many consonants are there in english alphabet?",
+      "answer": "21"
+    }
+  ],
+  "recipe": [
+    {
+      "name": "Smooth pancake",
+      "desc": "eggs mix in batter...... ",
+      "Time": "20 minutes",
+      "type": "breakfast",
+      "img": "assets/pancakes.jpg",
+      "link": "https://example.com/pancake-recipe"
+    },
+    {
+      "name": "Toast avacado",
+      "desc": "bake the bread then spread the avacado on it...... ",
+      "Time": "25 minutes",
+      "type": "breakfast",
+      "img": "assets/toast avacado.jpg",
+      "link": "https://example.com/Toast-avacado-recipe"
+    },
+    {
+      "name": "Blueberry smoothie cereal",
+      "desc": "make the blueberries into ...... ",
+      "Time": "18 minutes",
+      "type": "breakfast",
+      "img": "assets/blueberry smoothie.jpg",
+      "link": "https://example.com/Blueberry-smoothie-cereal-recipe"
+    },
+    {
+      "name": "Burger",
+      "desc": "bake the bread then place sauces ...... ",
+      "Time": "25 minutes",
+      "type": "-",
+      "img": "assets/burger.jpg",
+      "link": "https://example.com/Burger-recipe"
+    },
+    {
+      "name": "Thai rice",
+      "desc": "Steam the rice then give ...... ",
+      "Time": "27 minutes",
+      "type": "-",
+      "img": "assets/Thai rice.jpg",
+      "link": "https://example.com/Thai-rice-recipe"
+    },
+    {
+      "name": "Chinese noodles",
+      "desc": "cook the noodles till soft ...... ",
+      "Time": "20 minutes",
+      "type": "-",
+      "img": "assets/Chinese noodle.jpg",
+      "link": "https://example.com/Chinese-noodles-recipe"
+    },
+    {
+      "name": "Nasi lemak",
+      "desc": "cook rice till cooked then ...... ",
+      "Time": "25 minutes",
+      "type": "-",
+      "img": "assets/nasi lemak.jpg",
+      "link": "https://example.com/Nasi-lemak-recipe"
+    },
+    {
+      "name": "Roti canai",
+      "desc": "mix flour into water then ...... ",
+      "Time": "26 minutes",
+      "type": "-",
+      "img": "assets/roti canai.jpg",
+      "link": "https://example.com/Roti-canai-recipe"
+    },
+    {
+      "name": "Fish and Chips",
+      "desc": "fry the fish till ...... ",
+      "Time": "29 minutes",
+      "type": "-",
+      "img": "assets/fish and chips.jpg",
+      "link": "https://example.com/Fish-and-Chips-recipe"
+    },
+    {
+      "name": "Orang juice",
+      "desc": "squeeze the orang till ...... ",
+      "Time": "6 minutes",
+      "type": "drinks",
+      "img": "assets/orang juice.jpg",
+      "link": "https://example.com/Orang-juice-recipe"
+    },
+    {
+      "name": "Smoothies",
+      "desc": "mixing your fruit till ...... ",
+      "Time": "8 minutes",
+      "type": "drinks",
+      "img": "assets/smoothies.jpg",
+      "link": "https://example.com/Smoothies-recipe"
+    },
+    {
+      "name": "English tea",
+      "desc": "Depends on your taste  ...... ",
+      "Time": "5 minutes",
+      "type": "drinks",
+      "img": "assets/English tea.jpg",
+      "link": "https://example.com/English-tea-recipe"
+    }
+  ],
   "pokemon": [
     {
       "name": "Bulbasaur"
     },
     {
-      "name": "Beeble"
+      "name": "Ivysaur"
     },
     {
-      "name": "Bulbasaur"
+      "name": "Venusaur "
+    },
+    {
+      "name": "Charmander"
+    },
+    {
+      "name": "Charmeleon "
+    },
+    {
+      "name": "Charizard  "
     }
   ]
 }
