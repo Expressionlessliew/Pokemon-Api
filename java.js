@@ -410,3 +410,49 @@ function getRandomPokemon() {
       alert("Error fetching data");
     });
 }
+
+const inputField = document.getElementById("search");
+const suggestionsList = document.getElementById("pokemon-suggestions");
+
+// Function to fetch Pokémon names from the API
+function fetchPokemonNames(query) {
+  // Make an API request to fetch Pokémon names that match the query
+  fetch(`https://pokeapi.co/api/v2/pokemon?limit=10&offset=0`)
+    .then((response) => response.json())
+    .then((data) => {
+      // Filter Pokémon names based on the user's input
+      const filteredNames = data.results.filter((pokemon) =>
+        pokemon.name.includes(query.toLowerCase())
+      );
+
+      // Clear previous suggestions
+      suggestionsList.innerHTML = "";
+
+      // Display suggestions in the dropdown
+      filteredNames.forEach((pokemon) => {
+        const listItem = document.createElement("li");
+        listItem.textContent = pokemon.name;
+        
+        // Add click event to select a suggestion
+        listItem.addEventListener("click", () => {
+          inputField.value = pokemon.name;
+          suggestionsList.innerHTML = ""; // Clear the dropdown
+        });
+
+        suggestionsList.appendChild(listItem);
+      });
+    })
+    .catch((error) => {
+      console.error("Error fetching Pokémon names:", error);
+    });
+}
+
+// Event listener for input field
+inputField.addEventListener("input", (event) => {
+  const query = event.target.value;
+  if (query.length >= 2) {
+    fetchPokemonNames(query);
+  } else {
+    suggestionsList.innerHTML = ""; // Clear the dropdown if input is less than 2 characters
+  }
+});
