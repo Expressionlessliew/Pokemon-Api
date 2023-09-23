@@ -243,7 +243,7 @@ body {
 }
 
 .type-fighting {
-  background-color:cyan;
+  background-color: cyan;
   color: white;
   width: 70px;
 }
@@ -251,4 +251,54 @@ body {
 #errorContainer {
   color: red;
   text-align: center;
+}
+
+#fireTypeButton {
+  background-color: red;
+  color: white;
+  width: 50px;
+  padding: 5px 10px;
+  margin: 0px;
+  border-radius: 25px;
+  box-shadow: 0px 3px 5px rgba(0, 0, 0, 0.2);
+}
+
+#waterTypeButton {
+  background-color: blue;
+  color: white;
+  width: 50px;
+  padding: 5px 5px;
+  margin: 0px;
+  border-radius: 25px;
+  box-shadow: 0px 3px 5px rgba(0, 0, 0, 0.2);
+}
+
+#groundTypeButton {
+  background-color: lightcoral;
+  color: white;
+  width: 50px;
+  padding: 5px 3px;
+  margin: 0px;
+  border-radius: 25px;
+  box-shadow: 0px 3px 5px rgba(0, 0, 0, 0.2);
+}
+
+#electricTypeButton {
+  background-color: yellow;
+  color: black;
+  width: 50px;
+  padding: 5px 0px;
+  margin: 0px;
+  border-radius: 25px;
+  box-shadow: 0px 3px 5px rgba(0, 0, 0, 0.2);
+}
+
+#normalTypeButton {
+  background-color: white;
+  color: black;
+  width: 50px;
+  padding: 5px 0px;
+  margin: 0px;
+  border-radius: 25px;
+  box-shadow: 0px 3px 5px rgba(0, 0, 0, 0.2);
 }

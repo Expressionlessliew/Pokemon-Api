@@ -13,7 +13,7 @@ function changeBackgroundColor(pokemonTypes) {
     electric: "#FFF67D",
     steel: "grey",
     dark: "indig",
-    poison: "BlueViolet ",
+    poison: "BlueViolet",
     normal: "snow",
     ghost: "silver",
     bug: "seagreen",
@@ -38,8 +38,197 @@ function changeBackgroundColor(pokemonTypes) {
   }
 }
 
+// Function to display Pokémon details in the same container
+function displayPokemonDetails(data) {
+  if (data) {
+    const { name, order, sprites, types, height, weight } = data;
+
+    const pokeNameContainer = document.createElement("h1");
+    pokeNameContainer.classList.add("pokeName");
+    pokeNameContainer.textContent = name;
+    const PokeContainer = document.getElementById("pokemoncontainer");
+    PokeContainer.appendChild(pokeNameContainer);
+
+    // Add a click event listener to the pokeNameContainer (optional)
+    pokeNameContainer.addEventListener("click", () => {
+      // Handle clicking the Pokémon's name (if needed)
+    });
+
+    const pokePicContainer = document.createElement("img");
+    pokePicContainer.classList.add("pokePic");
+    pokePicContainer.src = sprites.front_default;
+    pokePicContainer.alt = name;
+    PokeContainer.appendChild(pokePicContainer);
+
+    const pokeOrdContainer = document.createElement("p");
+    pokeOrdContainer.classList.add("pokeOrd");
+    pokeOrdContainer.textContent = `Order: ${order}`;
+    PokeContainer.appendChild(pokeOrdContainer);
+
+    const pokeheiContainer = document.createElement("p");
+    pokeheiContainer.classList.add("pokehei");
+    pokeheiContainer.textContent = `height: ${height} m`;
+    PokeContainer.appendChild(pokeheiContainer);
+
+    const pokehweiContainer = document.createElement("p");
+    pokehweiContainer.classList.add("pokewei");
+    pokehweiContainer.textContent = `weight: ${weight} kg`;
+    PokeContainer.appendChild(pokehweiContainer);
+
+    const typesContainer = document.createElement("div");
+    typesContainer.classList.add("pokeTypesContainer");
+
+    types.forEach((type) => {
+      const typeCell = document.createElement("div");
+      const typeName = type.type.name;
+
+      typeCell.classList.add("type-cell");
+      typeCell.classList.add(`type-${typeName}`);
+      typeCell.textContent = typeName;
+
+      typesContainer.appendChild(typeCell);
+    });
+
+    PokeContainer.appendChild(typesContainer);
+
+    // Change background color based on Pokémon type
+    changeBackgroundColor(types.map((type) => type.type.name));
+  } else {
+    console.log("No data found");
+  }
+}
+
+// Modify the getPokemonDetails function to call displayPokemonDetails
+function getPokemonDetails(pokemonName) {
+  // API call to fetch Pokémon details
+  fetch(`https://pokeapi.co/api/v2/pokemon/${pokemonName}`)
+    .then((response) => {
+      if (!response.ok) {
+        throw new Error("Network response was not ok");
+      }
+      return response.json();
+    })
+    .then((data) => {
+      // Clear the old data
+      const PokeContainer = document.getElementById("pokemoncontainer");
+      const errorContainer = document.getElementById("errorContainer");
+      PokeContainer.innerHTML = "";
+      errorContainer.textContent = "";
+
+      // Call the function to display Pokémon details in the same container
+      displayPokemonDetails(data);
+    })
+    .catch((error) => {
+      console.error(error);
+      const errorContainer = document.getElementById("errorContainer");
+      errorContainer.textContent =
+        "Error fetching data. Please try again later.";
+    });
+}
+
+const typeIds = {
+  fire: 10,
+  water: 11,
+  dragon: 16,
+  ground: 5,
+  psychic: 14,
+  electric: 13,
+  steel: 9,
+  dark: 17,
+  poison: 4,
+  normal: 1,
+  ghost: 8,
+  bug: 7,
+  flying: 3,
+  fairy: 18,
+  rock: 6,
+  ice: 15,
+  grass: 12,
+  fighting: 2,
+};
+
+const fireTypeButton = document.getElementById("fireTypeButton");
+
+fireTypeButton.addEventListener("click", function () {
+  filterPokemonByType("fire");
+});
+
+const waterTypeButton = document.getElementById("waterTypeButton");
+waterTypeButton.addEventListener("click", function () {
+  filterPokemonByType("water");
+});
+
+const groundTypeButton = document.getElementById("groundTypeButton");
+groundTypeButton.addEventListener("click", function () {
+  filterPokemonByType("ground");
+});
+
+const electricTypeButton = document.getElementById("electricTypeButton");
+electricTypeButton.addEventListener("click", function () {
+  filterPokemonByType("electric");
+});
+
+const normalTypeButton = document.getElementById("normalTypeButton");
+normalTypeButton.addEventListener("click", function () {
+  filterPokemonByType("normal");
+});
+
+function filterPokemonByType(typeName) {
+  // Clear previous data
+  const PokeContainer = document.getElementById("pokemoncontainer");
+  const errorContainer = document.getElementById("errorContainer");
+  PokeContainer.innerHTML = "";
+  errorContainer.textContent = "";
+
+  // Get the type ID based on the type name
+  const typeId = typeIds[typeName.toLowerCase()];
+
+  // Fetch Pokémon by type ID
+  fetch(`https://pokeapi.co/api/v2/type/${typeId}`)
+    .then((response) => {
+      if (!response.ok) {
+        throw new Error("Network response was not ok");
+      }
+      return response.json();
+    })
+    .then((data) => {
+      if (data && data.pokemon) {
+        // Keep track of the number of Pokémon displayed
+        let displayedPokemonCount = 0;
+
+        data.pokemon.forEach((pokemon) => {
+          if (displayedPokemonCount < 30) {
+            // Limit to 10 Pokémon
+            const pokemonName = pokemon.pokemon.name;
+            // Create a button for each Pokémon
+            const pokemonButton = document.createElement("button");
+            pokemonButton.textContent = pokemonName;
+            pokemonButton.classList.add("pokemon-type-button");
+
+            // Add a click event listener to display the Pokémon when clicked
+            pokemonButton.addEventListener("click", () => {
+              getPokemonDetails(pokemonName);
+            });
+
+            // Append the button to the container
+            PokeContainer.appendChild(pokemonButton);
+
+            displayedPokemonCount++; // Increment the count
+          }
+        });
+      } else {
+        console.log("No data found");
+      }
+    })
+    .catch((error) => {
+      console.error(error);
+      errorContainer.textContent =
+        "Error fetching data. Please try again later.";
+    });
+}
+
+// Take data from input
 const searchBtn = document.getElementById("searchbtn");
-const PokeContainer = document.getElementById("pokemoncontainer");
 const errorContainer = document.getElementById("errorContainer");
 
 searchBtn.addEventListener("click", getPoke);
@@ -47,6 +236,8 @@ searchBtn.addEventListener("click", getPoke);
 function getPoke() {
   console.log("hello");
   // Clear the old data
+  const PokeContainer = document.getElementById("pokemoncontainer");
+  const errorContainer = document.getElementById("errorContainer");
   PokeContainer.innerHTML = "";
   errorContainer.textContent = "";
 
@@ -71,6 +262,11 @@ function getPoke() {
         pokeNameContainer.classList.add("pokeName");
         pokeNameContainer.textContent = name;
         PokeContainer.appendChild(pokeNameContainer);
+
+        // Add a click event listener to the pokeNameContainer
+        pokeNameContainer.addEventListener("click", () => {
+          getPokemonDetails(name); // Call the function to navigate
+        });
 
         const pokePicContainer = document.createElement("img");
         pokePicContainer.classList.add("pokePic");
@@ -138,7 +334,6 @@ document.addEventListener("DOMContentLoaded", function () {
     isMuted = !isMuted;
     volumeButton.innerText = isMuted ? "Unmute" : "Mute";
   });
-  // setupAutocomplete([])
 });
 
 const randomPokemonButton = document.getElementById("randomPokemonButton");
@@ -147,6 +342,7 @@ randomPokemonButton.addEventListener("click", getRandomPokemon);
 
 function getRandomPokemon() {
   // Clear the old data
+  const PokeContainer = document.getElementById("pokemoncontainer");
   PokeContainer.innerHTML = "";
 
   // Generate a random Pokémon ID between 1 and 898 (total number of Pokémon in the API)
@@ -189,23 +385,20 @@ function getRandomPokemon() {
 
         const typesContainer = document.createElement("div");
         typesContainer.classList.add("pokeTypesContainer");
-        
+
         types.forEach((type) => {
           const typeCell = document.createElement("div");
           const typeName = type.type.name;
-        
+
           typeCell.classList.add("type-cell");
           typeCell.classList.add(`type-${typeName}`);
           typeCell.textContent = typeName;
-        
+
           typesContainer.appendChild(typeCell);
         });
-        
+
         PokeContainer.appendChild(typesContainer);
-        
-        // Change background color based on Pokémon type
-        changeBackgroundColor(types.map((type) => type.type.name));
-        
+
         // Change background color based on Pokémon type
         changeBackgroundColor(types.map((type) => type.type.name));
       } else {
@@ -217,54 +410,3 @@ function getRandomPokemon() {
       alert("Error fetching data");
     });
 }
-
-
-// Initialize Firebase (Use your Firebase config here)
-firebase.initializeApp(firebaseConfig);
-
-// Reference to your Firebase Realtime Database
-const database = firebase.database();
-const pokemonRef = database.ref("pokemon");
-
-const searchInput = document.getElementById("search");
-const suggestionsDiv = document.getElementById("suggestions");
-
-// Listen for input changes
-searchInput.addEventListener("input", () => {
-  const searchTerm = searchInput.value.toLowerCase().trim();
-
-  // Clear previous suggestions
-  suggestionsDiv.innerHTML = "";
-
-  if (searchTerm === "") {
-    return; // Don't make an empty search
-  }
-
-  // Fetch data from Firebase and filter by the search term
-  pokemonRef
-    .orderByChild("name")
-    .startAt(searchTerm)
-    .endAt(searchTerm + "\uf8ff")
-    .once("value")
-    .then((snapshot) => {
-      const suggestions = [];
-
-      snapshot.forEach((childSnapshot) => {
-        const pokemonName = childSnapshot.val().name;
-        suggestions.push(pokemonName);
-      });
-
-      // Display suggestions
-      suggestions.forEach((suggestion) => {
-        const suggestionElement = document.createElement("div");
-        suggestionElement.textContent = suggestion;
-        suggestionsDiv.appendChild(suggestionElement);
-
-        // Handle suggestion click
-        suggestionElement.addEventListener("click", () => {
-          searchInput.value = suggestion;
-          suggestionsDiv.innerHTML = ""; // Clear suggestions
-        });
-      });
-    });
-});
