@@ -451,42 +451,50 @@ randomPokemonButton.addEventListener("click", function () {
 
           PokeContainer.appendChild(typesContainer);
 
-        const movesContainer = document.createElement("div");
-        movesContainer.classList.add("pokeMovesContainer");
+          const movesContainer = document.createElement("div");
+          movesContainer.classList.add("pokeMovesContainer");
+  
+          // Sort the moves by their power (base_power)
+          moves.sort((a, b) => {
+            const basePowerA = getMoveBasePower(a);
+            const basePowerB = getMoveBasePower(b);
+            return basePowerB - basePowerA;
+          });
+  
+          // Display the three most powerful moves
+          const bestMovesLabel = document.createElement("div");
+          bestMovesLabel.classList.add("best-moves-label");
+          bestMovesLabel.textContent = "Best Moves";
+          movesContainer.appendChild(bestMovesLabel);
+  
+          moves.slice(0, 3).forEach((move) => {
+            const moveCell = document.createElement("div");
+            moveCell.classList.add("move-cell");
+            moveCell.textContent = move.move.name;
+  
+            movesContainer.appendChild(moveCell);
+          });
+  
+          PokeContainer.appendChild(movesContainer);  
 
-        // Sort the moves by their power (base_power)
-        moves.sort((a, b) => {
-          const basePowerA = getMoveBasePower(a);
-          const basePowerB = getMoveBasePower(b);
-          return basePowerB - basePowerA;
-        });
+          // Change background color based on Pokémon type
+          changeBackgroundColor(types.map((type) => type.type.name));
+        } else {
+          console.log("No data found");
+        }
 
-        // Display the three most powerful moves
-        const bestMovesLabel = document.createElement("div");
-        bestMovesLabel.classList.add("best-moves-label");
-        bestMovesLabel.textContent = "Best Moves";
-        movesContainer.appendChild(bestMovesLabel);
-
-        moves.slice(0, 3).forEach((move) => {
-          const moveCell = document.createElement("div");
-          moveCell.classList.add("move-cell");
-          moveCell.textContent = move.move.name;
-
-          movesContainer.appendChild(moveCell);
-        });
-
-        PokeContainer.appendChild(movesContainer);
-        // Change background color based on Pokémon type
-        changeBackgroundColor(types.map((type) => type.type.name));
-      } else {
-        console.log("No data found");
-      }
-    })
-    .catch((error) => {
-      console.log(error);
-      alert("Error fetching data");
-    });
-}
+        // Enable the button after 3 seconds
+        setTimeout(function () {
+          canClickRandomButton = true;
+        }, 3000); // 3000 milliseconds = 3 seconds
+      })
+      .catch((error) => {
+        console.log(error);
+        alert("Error fetching data");
+        canClickRandomButton = true; // Enable the button in case of an error
+      });
+  }
+});
 
 const inputField = document.getElementById("search");
 const suggestionsList = document.getElementById("pokemon-suggestions");
