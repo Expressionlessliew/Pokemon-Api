@@ -1,7 +1,6 @@
 // Function to change background color based on Pokémon type
 function changeBackgroundColor(pokemonTypes) {
   const container = document.getElementById("pokemoncontainer");
-  console.log(container);
 
   // Define CSS styles for each type
   const typeStyles = {
@@ -41,7 +40,7 @@ function changeBackgroundColor(pokemonTypes) {
 // Function to display Pokémon details in the same container
 function displayPokemonDetails(data) {
   if (data) {
-    const { name, order, sprites, types, height, weight } = data;
+    const { name, order, sprites, types, height, weight, moves } = data;
 
     const pokeNameContainer = document.createElement("h1");
     pokeNameContainer.classList.add("pokeName");
@@ -90,6 +89,31 @@ function displayPokemonDetails(data) {
     });
 
     PokeContainer.appendChild(typesContainer);
+    const movesContainer = document.createElement("div");
+    movesContainer.classList.add("pokeMovesContainer");
+
+    // Sort the moves by their power (base_power)
+    moves.sort((a, b) => {
+      const basePowerA = getMoveBasePower(a);
+      const basePowerB = getMoveBasePower(b);
+      return basePowerB - basePowerA;
+    });
+
+    // Display the three most powerful moves
+    const bestMovesLabel = document.createElement("div");
+    bestMovesLabel.classList.add("best-moves-label");
+    bestMovesLabel.textContent = "Best Moves";
+    movesContainer.appendChild(bestMovesLabel);
+
+    moves.slice(0, 3).forEach((move) => {
+      const moveCell = document.createElement("div");
+      moveCell.classList.add("move-cell");
+      moveCell.textContent = move.move.name;
+
+      movesContainer.appendChild(moveCell);
+    });
+
+    PokeContainer.appendChild(movesContainer);
 
     // Change background color based on Pokémon type
     changeBackgroundColor(types.map((type) => type.type.name));
@@ -116,6 +140,7 @@ function getPokemonDetails(pokemonName) {
       errorContainer.textContent = "";
 
       // Call the function to display Pokémon details in the same container
+      console.log(data);
       displayPokemonDetails(data);
     })
     .catch((error) => {
@@ -234,7 +259,6 @@ const errorContainer = document.getElementById("errorContainer");
 searchBtn.addEventListener("click", getPoke);
 
 function getPoke() {
-  console.log("hello");
   // Clear the old data
   const PokeContainer = document.getElementById("pokemoncontainer");
   const errorContainer = document.getElementById("errorContainer");
@@ -256,7 +280,7 @@ function getPoke() {
     })
     .then((data) => {
       if (data) {
-        const { name, order, sprites, types, height, weight } = data;
+        const { name, order, sprites, types, height, weight, moves } = data;
 
         const pokeNameContainer = document.createElement("h1");
         pokeNameContainer.classList.add("pokeName");
@@ -304,7 +328,31 @@ function getPoke() {
         });
 
         PokeContainer.appendChild(typesContainer);
+        const movesContainer = document.createElement("div");
+        movesContainer.classList.add("pokeMovesContainer");
 
+        // Sort the moves by their power (base_power)
+        moves.sort((a, b) => {
+          const basePowerA = getMoveBasePower(a);
+          const basePowerB = getMoveBasePower(b);
+          return basePowerB - basePowerA;
+        });
+
+        // Display the three most powerful moves
+        const bestMovesLabel = document.createElement("div");
+        bestMovesLabel.classList.add("best-moves-label");
+        bestMovesLabel.textContent = "Best Moves";
+        movesContainer.appendChild(bestMovesLabel);
+
+        moves.slice(0, 3).forEach((move) => {
+          const moveCell = document.createElement("div");
+          moveCell.classList.add("move-cell");
+          moveCell.textContent = move.move.name;
+
+          movesContainer.appendChild(moveCell);
+        });
+
+        PokeContainer.appendChild(movesContainer);
         // Change background color based on Pokémon type
         changeBackgroundColor(types.map((type) => type.type.name));
       } else {
@@ -355,7 +403,7 @@ function getRandomPokemon() {
       errorContainer.textContent = "";
 
       if (data) {
-        const { name, order, sprites, types, height, weight } = data;
+        const { name, order, sprites, types, height, weight, moves } = data;
 
         const pokeNameContainer = document.createElement("h1");
         pokeNameContainer.classList.add("pokeName");
@@ -399,6 +447,31 @@ function getRandomPokemon() {
 
         PokeContainer.appendChild(typesContainer);
 
+        const movesContainer = document.createElement("div");
+        movesContainer.classList.add("pokeMovesContainer");
+
+        // Sort the moves by their power (base_power)
+        moves.sort((a, b) => {
+          const basePowerA = getMoveBasePower(a);
+          const basePowerB = getMoveBasePower(b);
+          return basePowerB - basePowerA;
+        });
+
+        // Display the three most powerful moves
+        const bestMovesLabel = document.createElement("div");
+        bestMovesLabel.classList.add("best-moves-label");
+        bestMovesLabel.textContent = "Best Moves";
+        movesContainer.appendChild(bestMovesLabel);
+
+        moves.slice(0, 3).forEach((move) => {
+          const moveCell = document.createElement("div");
+          moveCell.classList.add("move-cell");
+          moveCell.textContent = move.move.name;
+
+          movesContainer.appendChild(moveCell);
+        });
+
+        PokeContainer.appendChild(movesContainer);
         // Change background color based on Pokémon type
         changeBackgroundColor(types.map((type) => type.type.name));
       } else {
@@ -413,6 +486,16 @@ function getRandomPokemon() {
 
 const inputField = document.getElementById("search");
 const suggestionsList = document.getElementById("pokemon-suggestions");
+
+// Helper function to get the base power of a move
+function getMoveBasePower(move) {
+  const versionGroupDetails = move.version_group_details.find(
+    (detail) => detail.move_learn_method.name === "level-up"
+  );
+  return versionGroupDetails
+    ? versionGroupDetails.move_learn_method.level_learned_at
+    : 0;
+}
 
 // Function to fetch Pokémon names from the API
 function fetchPokemonNames(query) {
@@ -432,7 +515,7 @@ function fetchPokemonNames(query) {
       filteredNames.forEach((pokemon) => {
         const listItem = document.createElement("li");
         listItem.textContent = pokemon.name;
-        
+
         // Add click event to select a suggestion
         listItem.addEventListener("click", () => {
           inputField.value = pokemon.name;
